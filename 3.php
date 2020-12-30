@@ -20,4 +20,5 @@ while ($TimeMinutes >= 60) {
 }
 
 echo "$Degrees градусов $APm равняется $TimeHour часов $TimeMinutes минут\n";
+//test github changes
 ?>
