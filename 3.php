@@ -23,8 +23,17 @@ function DegreesToTime(){
 echo DegreesToTime() . "\n";
 //echo AskDegrees() . "\n";
 
-
+---------------------------
 $a = 0;
+if ($a >= 0) {
+	echo "true\n";
+}
+else{
+	echo "false\n";
+}
+
+---------------------------
+$a = readline("enter:");
 if ($a >= 0) {
 	echo "true\n";
 }
