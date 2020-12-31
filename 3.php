@@ -3,23 +3,56 @@
 https://php720.com/task/7
 Разработайте программу, которая определяла количество прошедших часов по введенным пользователем градусах. Введенное число может быть от 0 до 360.
 */
-function AskDegrees(){
+function AskAmPm() {
+	$apm = readline("Введите am или pm: \n");
+	if ($apm == "am" or $apm == "pm") {
+		return $apm;
+	}
+	else{
+		return false;
+	}
+}
+
+function AskDegrees() {
 	$d = readline("Введите градусы от 0 до 360: \n");
 	if ($d >= 0 and $d <= 360) {
 		return $d;
 	}
-	else {
+	else{
 		return false;
 	}
 }
-function DegreesToTime(){
-	$t = AskDegrees();
-	while ($t === false) {
-		echo "Введено неверное значение градусов.\n";
-		$t = AskDegrees();
+
+function ChangeTimeFormat($ChApm, $ChD) {
+	$hour = 0;
+	$minutes = 0;
+	$SumMin = 0;
+	if ($ChApm == "pm") {
+		$SumMin = 720;//pm - 12 часов = 720 минут
 	}
-	echo "Ввели $t";
+	$SumMin += $ChD * 2;// к минутам прибавляем градусы переведенные в минуты(1 градус = 2 минуты)
+	while ($SumMin >= 60) {
+		$hour ++;
+		$SumMin -= 60;
+	}
+	$minutes = $SumMin;
+	return ['hour' => $hour, 'minutes' => $minutes];//функция возвращает ассоциативный массив
 }
-echo DegreesToTime() . "\n";
-//echo AskDegrees() . "\n";
+
+function main() {
+	$AmPm = AskAmPm();
+	while ($AmPm === false) {//проверяем правильность формата времени
+		echo "Введен неверный формат времени.\n";
+		$AmPm = AskAmPm();
+	}
+	$Degrees = AskDegrees();
+	while ($Degrees === false) {//проверяем правельность значения градусов
+		echo "Введено неверное значение градусов.\n";
+		$Degrees = AskDegrees();
+	}
+	$TimeArr = ChangeTimeFormat($AmPm, $Degrees);
+	echo "Часов $TimeArr[hour] минут $TimeArr[minutes]\n";
+}
+
+main();
 ?>
