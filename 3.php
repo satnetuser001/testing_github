@@ -13,12 +13,6 @@ class AskAmPm{
 	}
 }
 
-$objAskAmPm = new AskAmPm();
-$objAskAmPm -> AskUser();
-echo $objAskAmPm -> APm . "\n";
-var_dump($objAskAmPm -> APm) . "\n";
-
-
 class AskDegrees{
 	public $Degrees;
 	public function AskUser(){
@@ -32,11 +26,6 @@ class AskDegrees{
 		}
 	}
 }
-$objAskDegrees = new AskDegrees();
-$objAskDegrees -> AskUser();
-echo $objAskDegrees -> Degrees . "\n";
-var_dump($objAskDegrees -> Degrees) . "\n";
-
 
 class ChangeTimeFormat{
 	public $hour = 0;
@@ -57,18 +46,31 @@ class ChangeTimeFormat{
 	}
 }
 
-$objChangeTimeFormat = new ChangeTimeFormat("pm", 2);
-echo $objChangeTimeFormat -> hour . "\n";
-echo $objChangeTimeFormat -> minutes . "\n";
-
-
 class Main{
-	//Создаем объекты из всех классов
-	$objAskAmPm = new AskAmPm();
-	$objAskDegrees = new AskDegrees();
-	$objChangeTimeFormat = new ChangeTimeFormat("pm", 2);
+	public function __construct(){
+		//Создаем объекты из классов AskAmPm, AskDegrees
+		$objAskAmPm = new AskAmPm();
+		$objAskDegrees = new AskDegrees();
 
-	
-	$objAskAmPm -> AskUser();
+		//am or pm
+		$objAskAmPm -> AskUser();
+		while ( $objAskAmPm -> AskUser() === false) {
+			echo "Введен неверный формат времени.\n";
+			$objAskAmPm -> AskUser();
+		}
+
+		//спрашиваем градусы
+		$objAskDegrees -> AskUser();
+		while ( $objAskDegrees -> AskUser() === false) {
+			echo "Введено неверное значение градусов.\n";
+			$objAskDegrees -> AskUser();
+		}
+
+		//Создаем объекты из классa ChangeTimeFormat
+		$objChangeTimeFormat = new ChangeTimeFormat($objAskAmPm -> APm, $objAskDegrees -> Degrees);
+		echo "часов " . $objChangeTimeFormat -> hour . " минут " . $objChangeTimeFormat -> minutes . "\n";
+	}
 }
+
+$objMain = new Main();
 ?>
