@@ -15,7 +15,8 @@ function AskAmPm() {
 
 function AskDegrees() {
 	$d = readline("Введите градусы от 0 до 360: \n");
-	if ($d >= 0 and $d <= 360) {
+	$IsNum = is_numeric($d);//проверка введено ли число(при вводе пустой строки выходила ошибка)
+	if ($d >= 0 and $d <= 360 and $IsNum == true) {
 		return $d;
 	}
 	else{
