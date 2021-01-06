@@ -54,14 +54,14 @@ class Main{
 
 		//am or pm
 		$objAskAmPm -> AskUser();
-		while ( $objAskAmPm -> AskUser() === false) {
+		while ( $objAskAmPm -> APm === false) {
 			echo "Введен неверный формат времени.\n";
 			$objAskAmPm -> AskUser();
 		}
 
 		//спрашиваем градусы
 		$objAskDegrees -> AskUser();
-		while ( $objAskDegrees -> AskUser() === false) {
+		while ( $objAskDegrees -> Degrees === false) {
 			echo "Введено неверное значение градусов.\n";
 			$objAskDegrees -> AskUser();
 		}
